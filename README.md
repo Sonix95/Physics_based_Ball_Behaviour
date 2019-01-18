@@ -2,4 +2,4 @@
 
 Rigidbody only for detect collison
 
-![dd](https://user-images.githubusercontent.com/44851397/51344952-ceee5880-1aaa-11e9-85b8-5b9659e7feef.gif)
+![demo](https://user-images.githubusercontent.com/44851397/51382887-04398b80-1b29-11e9-9d9a-1101115d17d8.gif)
