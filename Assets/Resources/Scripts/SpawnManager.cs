@@ -17,8 +17,7 @@ public class SpawnManager : MonoBehaviour
     public bool useRandomStartSpeed = false;    
 
     [Header("Invoke Time")]
-    public float startCall = 2f;
-    public float repeatTime = 2f;
+    public float repeatTime = 0.5f;
 
     [Header("X coordinates")]
     public float xMin = -20f;
@@ -27,32 +26,46 @@ public class SpawnManager : MonoBehaviour
     [Header("Y coordinates")]
     public float yMin = 5f;
     public float yMax = 20f;
+    
+    [Header("Random Gravity")]
+    public float minGravity = -15f;
+    public float maxGravity = 15f;
+
+    [Header("Random Start Speed")]
+    public float minStartSpeed = -20f;
+    public float maxStartSpeed = 20f;
 
     #endregion
 
     #region Methods
 
-    private void OnEnable()
+    private void Start()
     {
-        StartCoroutine(instObj());
+        StartSpawnig();
     }
 
-    private void OnDisable()
+    public void StartSpawnig()
     {
-        StopCoroutine(instObj());
+        StopSpawnig();
+        StartCoroutine(InstObj());
     }
 
-    IEnumerator instObj()
+    public void StopSpawnig()
     {
-        GeneratePrimitive();
+        StopAllCoroutines();
+    }
+
+    IEnumerator InstObj()
+    {
         yield return new WaitForSeconds(repeatTime);
-        StartCoroutine(instObj());
+        GeneratePrimitive();
+        StartCoroutine(InstObj());
     }
 
     private PrimitiveType GetRandomPrimitive()
     {
         int randomPrimitive = Random.Range(0, 4);
-        PrimitiveType primitive = PrimitiveType.Sphere;
+        PrimitiveType primitive;
 
         switch(randomPrimitive)
         {
@@ -68,6 +81,9 @@ public class SpawnManager : MonoBehaviour
             case 3:
                 primitive = PrimitiveType.Cube;
                 break;
+            default:
+                primitive = PrimitiveType.Sphere;
+                break;
         }
 
         return primitive;
@@ -82,8 +98,8 @@ public class SpawnManager : MonoBehaviour
         GameObject primitiveObject = GameObject.CreatePrimitive(useRandomPrimitive ? GetRandomPrimitive() : buildinPrimitive);
         primitiveObject.transform.position = position;
         primitiveObject.AddComponent<Rigidbody>().useGravity = false;
-        primitiveObject.AddComponent<SimplePhysics>().gravity = useRandomGravity ? Random.Range(-10,10) : gravity;
-        primitiveObject.GetComponent<SimplePhysics>().startSpeed = useRandomStartSpeed ? Random.Range(-20, 20) : startSpeed;
+        primitiveObject.AddComponent<SimplePhysics>().gravity = useRandomGravity ? Random.Range(minGravity, maxGravity) : gravity;
+        primitiveObject.GetComponent<SimplePhysics>().startSpeed = useRandomStartSpeed ? Random.Range(minStartSpeed, maxStartSpeed) : startSpeed;
     }
 
     #endregion
