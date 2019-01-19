@@ -16,15 +16,15 @@ public class UIHandler : MonoBehaviour
 
     private Toggle _toggleGravityAll = null;
     private Slider _sliderGravity = null;
-    private TextMeshProUGUI _textMeshGravityValue = null;
+    private Text _textMeshGravityValue = null;
 
     private Dropdown _dropdownPrimitives = null;
 
     private Slider _sliderSpawnTime = null;
-    private TextMeshProUGUI _textMeshSpawnTime = null;
+    private Text _textMeshSpawnTime = null;
 
     private Slider _sliderStartSpeed = null;
-    private TextMeshProUGUI _textMeshStartSpeed = null;
+    private Text _textMeshStartSpeed = null;
 
     #endregion
 
@@ -45,15 +45,15 @@ public class UIHandler : MonoBehaviour
 
         _sliderGravity = GameObject.Find("SliderGravity").GetComponent<Slider>();
         _toggleGravityAll = GameObject.Find("ToggleGravityAll").GetComponent<Toggle>();
-        _textMeshGravityValue = GameObject.Find("GravityValueLabel").GetComponent<TextMeshProUGUI>();
+        _textMeshGravityValue = GameObject.Find("GravityValueLabel").GetComponent<Text>();
 
         _dropdownPrimitives = GameObject.Find("DropdownPrimitives").GetComponent<Dropdown>();
 
         _sliderSpawnTime = GameObject.Find("SliderSpawnTime").GetComponent<Slider>();
-        _textMeshSpawnTime = GameObject.Find("SpawnTimeLabel").GetComponent<TextMeshProUGUI>();
+        _textMeshSpawnTime = GameObject.Find("SpawnTimeLabel").GetComponent<Text>();
 
         _sliderStartSpeed = GameObject.Find("StartSpeedTime").GetComponent<Slider>();
-        _textMeshStartSpeed = GameObject.Find("StartSpeedLabel").GetComponent<TextMeshProUGUI>();
+        _textMeshStartSpeed = GameObject.Find("StartSpeedLabel").GetComponent<Text>();
     }
 
     private void InitElements()
